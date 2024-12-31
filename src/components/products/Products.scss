@@ -1,0 +1,66 @@
+@import "../../scss/variables";
+@import "../../scss/mixin";
+
+.product-list{
+    margin: 1rem;
+    @include flex(row, center, 1rem);
+
+.card{
+    width: 350px;
+    height: $cardHeight;
+    position: relative;
+    overflow: hidden;
+    
+    .price{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /*transform: translate(-50%, -50%); CSS kodu, öğenin (element) konumunu yatay ve dikey olarak %50 oranında kaydırarak hareket ettiren bir transformasyon özelliğidir. Bu özellik, genellikle bir öğeyi ekranın tam ortasına yerleştirmek için kullanılır.*/
+        background-color: $cardBgColor ;
+        color:$cardColor ;
+        padding: $cardPadding;
+        font-size: 0.9rem;
+        border-radius: $borderRadius;
+        z-index: 2;
+    }
+ 
+    .card_over{
+        position: absolute;
+        width: 100%;
+        z-index: 3;
+        bottom: 0;
+        background-color:$cardBgColor;
+        color: darken($cardBgColor,50%); 
+        /*darken fonk. kullanma=> color: darken($cardBgColor, 50%)*/
+        border-radius:$borderRadius;
+        padding: $cardPadding;
+        color: $cardColor;
+        font-size: 1.2rem;
+        transform: translateX(100%);
+        /*Bir öğenin genişliği 200px ise, translateX(100%) uygulandığında bu öğe, 200px sağa kayacaktır. Bu, öğenin orijinal pozisyonunun dışına çıkmasına neden olur.*/
+        transition: transform 1s ease;
+        height: 25%;
+        overflow: auto;
+        &::-webkit-scrollbar{     //!önemli:webkit kullanımı
+            display: none;
+        }
+    }
+    // .product-card:hover
+    &:hover .card_over{
+        transform: translateX(0%);
+        /*CSS'te transition özellikleri stil değişikliklerinde uygulanır, ancak hover sadece bir etkileşim durumudur. Hover durumunda öğe stil değiştirir, ancak transition bu stil değişikliğinin ne kadar sürede gerçekleşeceğini belirler.O yüzden transition buraya verilmez.*/
+    }
+    &:hover img{
+        filter:none;
+    }
+img{
+    width: 100%;
+    height:$cardHeight ;
+    border-radius:$borderRadius ;
+    filter:opacity(0.8);
+}
+}
+}
+
+

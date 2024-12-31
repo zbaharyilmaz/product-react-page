@@ -1,0 +1,38 @@
+name: Deploy React App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # 2. Setup pnpm (pnpm kullanıyorsanız bu adımı ekleyin)
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '7'
+
+      # 3. Install dependencies with pnpm
+      - name: Install dependencies
+        run: pnpm install
+
+      # 4. Build the React app
+      - name: Build React app
+        run: pnpm run build
+
+      # 5. Deploy to GitHub Pages (Deploy to gh-pages branch)
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages   # Deploy edilen branch
+          folder: build      # Derlenmiş dosyaların bulunduğu klasör
